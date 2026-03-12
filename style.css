@@ -1,4 +1,4 @@
-/* Page Layout */
+/* Base Layout */
 
 body{
 margin:0;
@@ -11,75 +11,69 @@ justify-content:center;
 align-items:center;
 
 min-height:100vh;
+padding:20px;
+box-sizing:border-box;
 }
 
 
-/* Main Container */
+/* Container */
 
 .container{
-
 text-align:center;
-max-width:1100px;
-
+max-width:1200px;
+width:100%;
 }
 
 
 /* Title */
 
 h1{
-
 font-family:'Playfair Display',serif;
 color:#ff4f7a;
 font-size:42px;
 margin-bottom:5px;
-
 }
 
 .subtitle{
-
 opacity:0.7;
-
 }
 
 
-/* Book Container */
+/* Book */
 
 #book{
 
 width:900px;
 height:600px;
 
-margin-top:40px;
+max-width:100%;
+
+margin:40px auto;
 
 box-shadow:0 0 50px rgba(0,0,0,0.8);
 
 }
 
 
-/* Individual Page */
+/* Page */
 
 .page{
-
 background:white;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 }
 
 
-/* Canvas (PDF Pages) */
+/* PDF Canvas */
 
 canvas{
-
 width:100%;
 height:100%;
-
 }
 
 
-/* Page Indicator */
+/* Page Info */
 
 .page-info{
 
@@ -93,7 +87,7 @@ font-family:'Playfair Display',serif;
 }
 
 
-/* Jump To Page Controls */
+/* Page Jump */
 
 .page-jump{
 
@@ -102,11 +96,9 @@ margin-top:15px;
 display:flex;
 justify-content:center;
 gap:10px;
+flex-wrap:wrap;
 
 }
-
-
-/* Input */
 
 .page-jump input{
 
@@ -118,12 +110,7 @@ border:none;
 
 font-size:14px;
 
-outline:none;
-
 }
-
-
-/* Button */
 
 .page-jump button{
 
@@ -141,29 +128,21 @@ transition:0.2s;
 
 }
 
-
-/* Button Hover */
-
 .page-jump button:hover{
-
 background:#ff2e5c;
-
 }
 
 
-/* Hint Text */
+/* Hint */
 
 .hint{
-
 margin-top:20px;
 opacity:0.6;
-
 font-size:14px;
-
 }
 
 
-/* Tulip Decorations */
+/* Tulips */
 
 .tulip{
 
@@ -171,7 +150,7 @@ position:fixed;
 
 bottom:10px;
 
-width:35px;   /* smaller tulips */
+width:35px;
 
 opacity:0.8;
 
@@ -179,22 +158,59 @@ pointer-events:none;
 
 }
 
-
-/* Left Tulip */
-
 .tulip-left{
-
 left:12px;
+}
+
+.tulip-right{
+right:12px;
+transform:scaleX(-1);
+}
+
+
+/* -------- Tablet -------- */
+
+@media (max-width:900px){
+
+#book{
+
+width:100%;
+height:520px;
+
+}
+
+h1{
+font-size:34px;
+}
 
 }
 
 
-/* Right Tulip */
+/* -------- Mobile -------- */
 
-.tulip-right{
+@media (max-width:600px){
 
-right:12px;
+body{
+padding:10px;
+}
 
-transform:scaleX(-1);
+h1{
+font-size:28px;
+}
+
+#book{
+
+width:100%;
+height:420px;
+
+}
+
+.page-jump input{
+width:100px;
+}
+
+.tulip{
+width:25px;
+}
 
 }

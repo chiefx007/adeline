@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Haunting Adeline</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Haunting Adeline</h1>
+
+<p class="subtitle">
+"Let me know which stars you prefer. The ones above you, or the ones I make you see."
+</p>
+
+<div id="book"></div>
+
+<div class="page-info">
+Page <span id="currentPage">1</span> /
+<span id="totalPages">0</span>
+</div>
+
+<div class="page-jump">
+
+<input
+type="number"
+id="pageInput"
+placeholder="Page number"
+min="1"
+/>
+
+<button id="goPage">Go</button>
+
+</div>
+
+<p class="hint">
+Swipe, drag, or jump to a page
+</p>
+
+</div>
+
+<script src="script.js"></script>
+<img src="tulip.svg" class="tulip tulip-left">
+<img src="tulip.svg" class="tulip tulip-right">
+</body>
+</html>

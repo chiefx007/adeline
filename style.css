@@ -1,0 +1,200 @@
+/* Page Layout */
+
+body{
+margin:0;
+background:#0f0f12;
+color:white;
+font-family:'Poppins',sans-serif;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+min-height:100vh;
+}
+
+
+/* Main Container */
+
+.container{
+
+text-align:center;
+max-width:1100px;
+
+}
+
+
+/* Title */
+
+h1{
+
+font-family:'Playfair Display',serif;
+color:#ff4f7a;
+font-size:42px;
+margin-bottom:5px;
+
+}
+
+.subtitle{
+
+opacity:0.7;
+
+}
+
+
+/* Book Container */
+
+#book{
+
+width:900px;
+height:600px;
+
+margin-top:40px;
+
+box-shadow:0 0 50px rgba(0,0,0,0.8);
+
+}
+
+
+/* Individual Page */
+
+.page{
+
+background:white;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+
+/* Canvas (PDF Pages) */
+
+canvas{
+
+width:100%;
+height:100%;
+
+}
+
+
+/* Page Indicator */
+
+.page-info{
+
+margin-top:15px;
+font-size:16px;
+
+color:#ff4f7a;
+
+font-family:'Playfair Display',serif;
+
+}
+
+
+/* Jump To Page Controls */
+
+.page-jump{
+
+margin-top:15px;
+
+display:flex;
+justify-content:center;
+gap:10px;
+
+}
+
+
+/* Input */
+
+.page-jump input{
+
+width:120px;
+padding:8px;
+
+border-radius:6px;
+border:none;
+
+font-size:14px;
+
+outline:none;
+
+}
+
+
+/* Button */
+
+.page-jump button{
+
+padding:8px 16px;
+
+border:none;
+border-radius:6px;
+
+background:#ff4f7a;
+color:white;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+
+/* Button Hover */
+
+.page-jump button:hover{
+
+background:#ff2e5c;
+
+}
+
+
+/* Hint Text */
+
+.hint{
+
+margin-top:20px;
+opacity:0.6;
+
+font-size:14px;
+
+}
+
+
+/* Tulip Decorations */
+
+.tulip{
+
+position:fixed;
+
+bottom:10px;
+
+width:35px;   /* smaller tulips */
+
+opacity:0.8;
+
+pointer-events:none;
+
+}
+
+
+/* Left Tulip */
+
+.tulip-left{
+
+left:12px;
+
+}
+
+
+/* Right Tulip */
+
+.tulip-right{
+
+right:12px;
+
+transform:scaleX(-1);
+
+}

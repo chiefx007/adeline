@@ -11,14 +11,18 @@ const goButton = document.getElementById("goPage");
 
 let pdf;
 
-const pageFlip = new St.PageFlip(container,{
+const pageFlip = new St.PageFlip(container, {
 
 width:450,
 height:600,
 
 size:"stretch",
 
-usePortrait:false,
+minWidth:280,
+maxWidth:1000,
+
+minHeight:400,
+maxHeight:1350,
 
 showCover:false,
 
@@ -33,14 +37,14 @@ pdf = loadedPdf;
 
 totalIndicator.textContent = pdf.numPages;
 
-const pages=[];
+const pages = [];
 
 for(let i=0;i<pdf.numPages;i++){
 
-const div=document.createElement("div");
-div.className="page";
+const div = document.createElement("div");
+div.className = "page";
 
-const canvas=document.createElement("canvas");
+const canvas = document.createElement("canvas");
 
 div.appendChild(canvas);
 
@@ -50,42 +54,70 @@ pages.push(div);
 
 pageFlip.loadFromHTML(pages);
 
+
+/* Restore saved page */
+
+let savedPage = localStorage.getItem("lastPage");
+
+if(savedPage){
+
+pageFlip.flip(parseInt(savedPage)-1);
+
+renderPage(parseInt(savedPage));
+renderPage(parseInt(savedPage)+1);
+
+}else{
+
 renderPage(1);
 renderPage(2);
+
+}
+
+updatePageIndicator();
 
 });
 
 
 async function renderPage(pageNumber){
 
-if(pageNumber<1 || pageNumber>pdf.numPages) return;
+if(!pdf) return;
 
-const page=await pdf.getPage(pageNumber);
+if(pageNumber < 1 || pageNumber > pdf.numPages) return;
 
-const viewport=page.getViewport({scale:1.4});
+const canvas = document.querySelectorAll("canvas")[pageNumber-1];
 
-const canvas=document.querySelectorAll("canvas")[pageNumber-1];
+if(!canvas) return;
 
-const context=canvas.getContext("2d");
+if(canvas.dataset.rendered) return;
 
-canvas.width=viewport.width;
-canvas.height=viewport.height;
+const page = await pdf.getPage(pageNumber);
+
+const viewport = page.getViewport({scale:1.4});
+
+const context = canvas.getContext("2d");
+
+canvas.width = viewport.width;
+canvas.height = viewport.height;
 
 await page.render({
 canvasContext:context,
 viewport:viewport
 }).promise;
 
+canvas.dataset.rendered = "true";
+
 }
 
 
-pageFlip.on("flip", ()=>{
+/* Page Flip Event */
 
-const page=pageFlip.getCurrentPageIndex()+1;
+pageFlip.on("flip", () => {
 
-pageIndicator.textContent=page;
+let page = pageFlip.getCurrentPageIndex()+1;
 
-localStorage.setItem("lastPage",page);
+updatePageIndicator();
+
+localStorage.setItem("lastPage", page);
 
 renderPage(page);
 renderPage(page+1);
@@ -93,23 +125,42 @@ renderPage(page+1);
 });
 
 
+/* Page Indicator */
+
+function updatePageIndicator(){
+
+let page = pageFlip.getCurrentPageIndex()+1;
+
+pageIndicator.textContent = page;
+
+}
+
+
+/* Jump to Page */
+
 function goToPage(){
 
-let page=parseInt(pageInput.value);
+let page = parseInt(pageInput.value);
 
-if(!page || page<1 || page>pdf.numPages) return;
+if(!page || page < 1 || page > pdf.numPages) return;
 
 pageFlip.flip(page-1);
 
 renderPage(page);
 renderPage(page+1);
 
+updatePageIndicator();
+
+localStorage.setItem("lastPage", page);
+
 }
 
-goButton.addEventListener("click",goToPage);
 
-pageInput.addEventListener("keypress",(e)=>{
+goButton.addEventListener("click", goToPage);
 
-if(e.key==="Enter") goToPage();
+
+pageInput.addEventListener("keypress", (e)=>{
+
+if(e.key === "Enter") goToPage();
 
 });
